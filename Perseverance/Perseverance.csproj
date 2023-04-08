@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Messages\Messages.csproj" />
+    <ProjectReference Include="..\Plateau\Plateau.csproj" />
+    <ProjectReference Include="..\Robot\Robot.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,45 +1,38 @@
-﻿using System;
-using Perseverance;
+﻿using Robot;
 
 public class Program
 {
     static void Main(string[] args)
     {
-        try
-        {
-            Console.Write("Enter the plateau size: ");
+            var messagesPlateu = new Messages.Messages();
+
+            messagesPlateu.PlateauMessage();
+
             // Read the initial input
             string input1 = Console.ReadLine();
 
-            Plateu plateu = new Plateu();
+            Plateau.Plateau plateu = new Plateau.Plateau(input1);
 
-            plateu.dimensions = input1.Split('x');
-            plateu.plateauWidth = int.Parse(plateu.dimensions[0]);
-            plateu.plateauHeight = int.Parse(plateu.dimensions[1]);
+            messagesPlateu.PlateauMessageCommand();
 
-            // Create the plateau
-            bool[,] plateau = new bool[plateu.plateauWidth, plateu.plateauHeight];
-
-            Console.Write("Enter the commands: ");
             // Read the second input line containing the commands
-            string input2 = Console.ReadLine();
+
+            DirectionManager directionManager = new DirectionManager();
 
             // Create the robot and set its initial position and facing direction
-            Robot robot = new Robot();
+            Robot.Robot robot = new Robot.Robot();
+            
+            var input2 = Console.ReadLine();
 
+            Direction direction = new Direction(robot,input2);
 
-            robot.X = 1;
-            robot.Y = 1;
-            robot.Direction = 'N';
-            robot.RobotDirection(input2);
+            directionManager.AddDirection(direction);
 
-            Console.WriteLine($"Final position: ({robot.X}, {robot.Y}), {robot.NameDirection}"); 
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Check your input again! Please restart the process from 0");
-        }
-        Console.ReadKey();
+            directionManager.ProcessDirection();
+
+            messagesPlateu.FinalMessage(robot.X, robot.Y, robot.NameDirection); 
+
+            Console.ReadKey();
     }
 
 

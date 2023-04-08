@@ -1,4 +1,4 @@
-﻿namespace Perseverance
+﻿namespace Logger
 {
     public interface ILogger
     {
